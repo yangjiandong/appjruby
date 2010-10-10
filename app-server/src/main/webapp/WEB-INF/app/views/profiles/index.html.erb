@@ -1,0 +1,154 @@
+<% if administrator? %>
+<div class="line-block marginbottom10">
+  <ul style="float: right" class="horizontal">
+    <li class="marginleft10 restore">
+      <a href="#" onclick="$('restore-form').show();return false;" id="restore-link">Restore profile</a>
+    </li>
+  </ul>
+</div>
+<form class="admin marginbottom10" id="restore-form" action="<%= url_for :action => 'restore' -%>" enctype="multipart/form-data" style="display: none" method="post">
+    <table class="spaced width100">
+      <tr>
+        <td width="1%" nowrap>Backup: </td>
+        <td><%= file_field_tag 'backup' %></td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="Restore profile"></input>
+          <a href="#" onclick="$('restore-form').reset();$('restore-form').hide();return false;">Cancel</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+<% end %>
+
+
+<%
+  languages.sort{|x,y| x.getName() <=> y.getName()}.each do |language|
+    importers=controller.java_facade.getProfileImportersForLanguage(language.getKey())
+%>
+<div class="line-block">
+  <% if administrator? %>
+  <ul style="float: right" class="horizontal">
+    <li class="marginleft10 add">
+      <a href="#" onClick="$('create-form-<%= language.getKey() -%>').show();$('create-form-<%= language.getKey() -%>-name').focus();return false;" id="create-link-<%= language.getKey() -%>">Create</a>
+    </li>
+  </ul>
+  <% end %>
+  <h2><%= language.getName() %> profiles</h2>
+</div>
+
+<% if administrator? %>
+  <form class="admin" id="create-form-<%= language.getKey()-%>" action="<%= url_for :action => 'create' -%>" style="display: none" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="language" value="<%= language.getKey() -%>"></input>
+    <table class="spaced width100">
+      <tr>
+        <td width="1%" nowrap>Name: </td>
+        <td><input type="text" name="name" id="create-form-<%= language.getKey()-%>-name"></input></td>
+      </tr>
+      <% importers.to_a.sort{|x,y| x.getName() <=> y.getName()}.each do |importer| %>
+      <tr>
+        <td width="1%" nowrap><%= importer.getName() -%>: </td>
+        <td>
+          <%= file_field_tag "backup[#{importer.getKey()}]" %></input>
+          <span class="note">Optional configuration file</span>
+        </td>
+      </tr>
+      <% end %>
+
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="Create <%= language.getName() %> profile" id="create-submit-<%= language.getKey() -%>"></input>
+          <a href="#" onclick="$('create-form-<%= language.getKey()-%>').reset();$('create-form-<%= language.getKey()-%>').hide();return false;">Cancel</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+<% end %>
+
+<table class="data width100" id="profiles_<%= language.getKey() -%>">
+    <thead>
+      <tr>
+        <th class="left">Name</th>
+        <th class="right">Rules</th>
+        <th class="right">Alerts</th>
+        <th class="right">Projects</th>
+        <th class="right">Default</th>
+        <% if administrator? %>
+        <th width="1%" class="right" colspan="4">Operations</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+    <% @profiles.select{|p| p.language==language.getKey()}.each do |profile| %>
+    <tr class="<%= cycle 'even', 'odd', :name => language.getKey() -%>" id="<%= u profile.key %>">
+      <td><a href="<%= url_for :controller => 'rules_configuration', :action => 'index', :id => profile.id -%>" id="rules-<%= language.getKey() -%>-<%= u(profile.name) -%>"><%= h profile.name %></a></td>
+      
+      <td align="right">
+        <span id="activated_rules_<%= u profile.key -%>"><%= profile.active_rules.count -%></span>
+      </td>
+
+      <td align="right"><span id="alerts_<%= u profile.key -%>"><%= profile.alerts.size -%></span></td>
+      
+      <td align="right">
+        <% unless profile.default_profile? %>
+          <span id="projects_<%= u profile.key -%>"><%= profile.projects.size -%></span>
+        <% end %>
+      </td>
+
+    	<td align="right">
+        <% if (!profile.default_profile? && administrator?) %>
+        <%= button_to 'Set as default', { :action => 'set_as_default', :id => profile.id }, :class => 'action',
+                        :id => "activate_#{u profile.key}",
+                        :confirm => "Are you sure that you want to set the profile '#{profile.name}' as default ?",
+                        :method => :post %>
+        <% end %>
+        <% if profile.default_profile? %>
+          <%= image_tag 'tick.png', :id => "is_active_#{u profile.key}" %>
+        <% end %>
+      </td>
+
+
+       <% if administrator? %>
+
+         <td align="right">
+          <% if !profile.provided? %>
+             <% form_tag(:action => 'backup', :id => profile.id) do -%>
+              <input type="submit" name="button_backup" id="backup_<%= u profile.key %>" value="Backup"></input>
+            <% end
+            end %>
+        </td>
+
+        <td align="right">
+          <% if !(profile.provided?) %>
+             <% form_tag(:action => 'rename', :id => profile.id) do -%>
+              <%= hidden_field_tag 'rename_' + profile.id.to_s %>
+              <input type="button" name="button_rename" id="rename_<%= u profile.key %>" value="Rename" onClick='var name=prompt("New name"); if (name!=null) {$("rename_<%= profile.id %>").value=name; submit();} else {return false;}'>
+            <% end
+            end %>
+        </td>
+
+        <td align="right">
+             <% form_tag(:action => 'copy', :id => profile.id) do -%>
+              <%= hidden_field_tag 'copy_' + profile.id.to_s %>
+              <input type="button" name="button_copy" id="copy_<%= u profile.key %>" value="Copy" onClick='var name=prompt("Name for the new profile"); if (name!=null) {$("copy_<%= profile.id %>").value=name; submit();} else {return false;}'>
+            <% end %>
+        </td>
+
+        <td>
+            <% if (!(profile.provided?) && !(profile.default_profile?)) %>
+            <%= button_to "Delete", { :action => 'delete', :id => profile.id }, :class => 'action',
+                        :id => "delete_#{u profile.key}",
+                        :confirm => "Are you sure that you want to delete the profile '#{profile.name}' ?",
+                        :method => :post %>
+          <% end %>
+        </td>
+
+      <% end %>
+    </tr>
+    <% end %>
+    </tbody>
+</table>
+<br/><br/>
+<% end %>

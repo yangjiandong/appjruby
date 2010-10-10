@@ -1,0 +1,26 @@
+<h1 class="marginbottom10"><%= link_to 'Quality profiles', :controller => 'profiles', :action => 'index' -%> / <%= h @profile.language -%> / <%= h @profile.name %></h1>
+<%= render :partial => 'profiles/tabs', :locals => {:selected_tab=>'Permalinks'} %>
+
+<div class="tabs-panel marginbottom10 ">
+	<% exporters=controller.java_facade.getProfileExportersForLanguage(@profile.language) %>
+	<% if exporters.empty? %>
+	  <p>No permalinks</p>
+	<% else %>
+	  <br/>
+	  <table class="data without-header marginbottom10" id="permalinks-table">
+	    <tbody>
+	    <% exporters.to_a.sort{|x,y| x.getName() <=> y.getName()}.each do |exporter| %>
+	      <tr class="<%= cycle('even','odd') -%>">
+	        <td width="1%" nowrap>
+	          <%= h exporter.getName() -%>
+	        </td>
+	        <td>
+	          <% permalink=url_for :controller => 'profiles', :action => 'export', :language => @profile.language, :name => url_encode(@profile.name), :format => exporter.getKey(), :only_path => false %>
+	          <span class="small"><%= link_to permalink, permalink, :id => "export_" + exporter.getKey().to_s + "_" + u(@profile.key) %></span>
+	        </td>
+	      </tr>
+	    <% end %>
+	    </tbody>
+	  </table>
+	<% end %>
+</div>

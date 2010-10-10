@@ -1,0 +1,9 @@
+change
+========
+
+   1. ServerImpl
+
+   this.version = loadVersionFromManifest("/META-INF/maven/org.app.jruby/sill-plugin-api/pom.properties");
+
+
+   --END
