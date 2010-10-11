@@ -1,0 +1,50 @@
+TODO
+======
+
+   1. 多数据源支持
+
+   2. 后台任务
+
+   3. 数据库存储过程支持
+
+other
+------
+
+   1. 文件加密
+      
+      http://blog.chinaunix.net/u1/47395/showart_1834770.html
+      
+      a. gpg, mySVN/笔记/java/gpg.txt
+
+      假如你要加密的文件名为 diary.txt ，只需输入：
+      gpg -c diary.txt
+      会自动弹出对话框询问加密密码：
+      经过两次输入密码确定，就会在目录下生成 diary.txt.gpg，这个就是加密后的文件，不要忘记把原文件删掉哦～
+      解密的话，输入：
+      gpg diary.txt.gpg
+      输入正确的密码，diary.txt 就会在当前目录下重新生成。 
+
+      b. 用bcrypt加密文件（Encrypt with bcrypt）
+      -- 可通过cygwin 安装
+
+      你电脑中的敏感文件最好用Bcrypt这个程序加密一下。Bcrypt用的是安全BLOWFISH算法。
+      如何加密单个文件？
+      打开一个终端，输入如下命令：
+      bcrypt /MyDirectory/MyFile
+      接下来就会问你要设定的密码。（长度最少要八个字符，你可以用组合键"Ctrl" + "C"来终端Bcrypt的运行）
+      然后开始加密，并在加密后的文件添加bfe后缀，源文档则自动删除。
+      如何加密多个文件或者目录？
+      
+      如果你想加密多个文档或者一整个目录，你可以创建个文档包：
+      点击"菜单 | 工具 | Xarchive archiver". 
+      然后你就可以加密这个文档包了。
+      如何在加密后保留源文档？
+
+      这里要说明的是Bcrypt程序会自动删除源文档，而且无法恢复。如果你不想这样，你可以在打开程序时赋予它一个参数"-r"：
+      bcrypt -r /MyDirectory/MyFile
+      接下来照样要你输入密码。
+      如果想了解更多信息，请查看bcrypt的主页：
+      Bcrypt - Blowfish File Encryption
+
+   --END
+

@@ -366,22 +366,27 @@ mmmm
       </dependency>
 	  <dependency>
         <groupId>org.app.jruby</groupId>
-        <artifactId>app-plugin-api</artifactId>
+        <artifactId>sill-plugin-api</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.app.jruby</groupId>
-        <artifactId>app-squid</artifactId>
+        <artifactId>sill-squid</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.app.jruby</groupId>
-        <artifactId>app-testing-harness</artifactId>
+        <artifactId>sill-testing-harness</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.app.jruby</groupId>
-        <artifactId>app-core</artifactId>
+        <artifactId>sill-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.app.jruby</groupId>
+        <artifactId>sill-deprecated</artifactId>
         <version>${project.version}</version>
       </dependency>
 

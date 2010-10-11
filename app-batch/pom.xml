@@ -26,7 +26,7 @@
       <artifactId>sill-plugin-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.sonar</groupId>
+      <groupId>org.app.jruby</groupId>
       <artifactId>sill-squid</artifactId>
     </dependency>
     <dependency>
@@ -54,7 +54,7 @@
     </dependency>
     <dependency>
       <groupId>org.app.jruby</groupId>
-      <artifactId>sonar-testing-harness</artifactId>
+      <artifactId>sill-testing-harness</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
