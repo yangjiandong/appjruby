@@ -366,6 +366,10 @@
                   <maxIdleTime>60000</maxIdleTime>
                 </connector>
               </connectors>
+
+            <stopPort>9966</stopPort>
+            <stopKey>foo</stopKey>
+            <scanIntervalSeconds>5</scanIntervalSeconds>
               <systemProperties>
                 <systemProperty>
                   <name>sonar.home</name>
