@@ -192,14 +192,14 @@ public final class Platform {
     MutablePicoContainer startupContainer = servicesContainer.makeChildContainer();
     try {
       startupContainer.as(Characteristics.CACHE).addComponent(MavenRepository.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(GwtPublisher.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(RegisterMetrics.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(RegisterRules.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(RegisterProvidedProfiles.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(ActivateDefaultProfiles.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(JdbcDriverDeployer.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(ServerMetadataPersister.class);
-      startupContainer.as(Characteristics.CACHE).addComponent(RegisterQualityModels.class);
+      //startupContainer.as(Characteristics.CACHE).addComponent(GwtPublisher.class);
+//      startupContainer.as(Characteristics.CACHE).addComponent(RegisterMetrics.class);
+//      startupContainer.as(Characteristics.CACHE).addComponent(RegisterRules.class);
+//      startupContainer.as(Characteristics.CACHE).addComponent(RegisterProvidedProfiles.class);
+//      startupContainer.as(Characteristics.CACHE).addComponent(ActivateDefaultProfiles.class);
+//      startupContainer.as(Characteristics.CACHE).addComponent(JdbcDriverDeployer.class);
+//      startupContainer.as(Characteristics.CACHE).addComponent(ServerMetadataPersister.class);
+//      startupContainer.as(Characteristics.CACHE).addComponent(RegisterQualityModels.class);
       startupContainer.start();
 
       startupContainer.getComponent(ServerLifecycleNotifier.class).notifyStart();

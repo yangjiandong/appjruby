@@ -30,9 +30,9 @@ class UsersController < ApplicationController
 
     user=prepare_user
     if user.save
-      flash[:notice] = 'User is created.'
+      flash[:notice] = '新建用户成功.'
     end
-    
+
     to_index(user.errors, nil);
   end
 
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
 
     if user.login!=params[:user][:login]
       flash[:error] = 'Login can not be changed.'
-      
+
     elsif user.update_attributes(params[:user])
       flash[:notice] = 'User was successfully updated.'
     end
@@ -100,7 +100,7 @@ class UsersController < ApplicationController
 
   def set_groups
     @user = User.find(params[:id])
-    
+
     if  @user.set_groups(params[:groups])
       flash[:notice] = 'User is updated.'
     end
@@ -115,7 +115,7 @@ class UsersController < ApplicationController
 
     redirect_to(:action => 'index', :id => id)
   end
-  
+
   def toggle_edit_mode()
     current_user.toggle_edit_mode
     redirect_back_or_default(:controller => 'project')

@@ -11,6 +11,7 @@ jruby(snoar)
       app-server mvn eclipse:eclipse
 
    2、增加git仓库 http://github.com/yangjiandong/appjruby
+   
    git remote add origin git@github.com:yangjiandong/appjruby.git
 
    git push origin master:refs/heads/master
@@ -30,11 +31,11 @@ jruby(snoar)
 
    github user:yangjiandong,123456789,young.jiandong@gmail.com
 
-   2、建立branch 3.3.2
+   3、建立branch 3.3.2
    git branch 3.3.2
    git push origin 3.3.2
 
-   3、手工建立eclipse项目
+   4、手工建立eclipse项目
 
    a、建立m2_home变量
      mvn -Declipse.workspace=<path-to-eclipse-workspace> eclipse:add-maven-repo
@@ -42,9 +43,11 @@ jruby(snoar)
      mvn eclipse:eclipse
      bin/eclipse.bat
 
-   4、clone
+   5、clone
 
    git clone git://github.com/yangjiandong/sshapp.git sshapp
+
+   6、sonar 实体定义 persistence.xml
 
 2010.10.10
 -----------
