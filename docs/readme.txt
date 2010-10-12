@@ -70,3 +70,5 @@ mvn:
    app-deprecated >mvn install -Dmaven.test.skip=true
    app-testing-harness
    app-server
+
+   --END
