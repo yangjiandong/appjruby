@@ -1,6 +1,16 @@
 ruby
 =========
 
+2010.10.12
+------------
+
+   1. 通过proxy 安装
+
+   jruby -S gem install --http-proxy http://127.0.0.1:8580  jruby-openssl
+
+old
+-----
+
    1. ruby
 
       1.9.2
@@ -19,4 +29,5 @@ ruby
 
       1.5.3 -- Sep 28,2010
 
+   
    --END
