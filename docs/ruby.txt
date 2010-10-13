@@ -8,6 +8,12 @@ ruby
 
    jruby -S gem install --http-proxy http://127.0.0.1:8580  jruby-openssl
 
+   或直接用cygwin 命令行如mintty
+
+   jruby -S gem install jruby-openssl
+   jruby -S gem install rails
+   jruby -S gem install glassfish
+
 old
 -----
 
