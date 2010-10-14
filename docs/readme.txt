@@ -1,6 +1,39 @@
 jruby(snoar)
 ---------------
 
+2010.10.14
+----------
+
+   1. sonar 启动
+      
+      PlatformLifecycleListener <-- Platform.init()
+
+      // ? 有空看一下
+      rootContainer.as(Characteristics.CACHE).addComponent(JndiDatabaseConnector.class);
+      // ? 启动过程
+
+   2. picocontainer
+      http://www.picocontainer.org/
+      PicoContainer is a highly embeddable, full-service, 
+      Inversion of Control (IoC) container for components honor the Dependency Injection pattern
+
+   3. 配置信息
+      
+      org.sonar.api.database.DatabaseProperties
+      sonar.properties
+      org.sonar.api.CoreProperties
+      org.sonar.api.database.configuration.Property
+
+    4. 有关hibernate 操作类
+
+       org.sonar.jpa.session
+
+     5. tool 
+     --A very simple profiler to log the time elapsed performing some tasks.
+     sill-plugin-api
+     org.sonar.api.utils.TimeProfiler
+
+
 2010.10.11
 ----------
 

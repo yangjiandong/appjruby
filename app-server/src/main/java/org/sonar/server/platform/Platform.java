@@ -106,11 +106,14 @@ public final class Platform {
 
 
   private void startDatabaseConnectors(Configuration configuration) {
+    //生成容器
     rootContainer = IocContainer.buildPicoContainer();
     ConfigurationLogger.log(configuration);
 
     rootContainer.as(Characteristics.CACHE).addComponent(configuration);
+    //嵌入式数据库
     rootContainer.as(Characteristics.CACHE).addComponent(EmbeddedDatabaseFactory.class);
+    // hibernate 数据库
     rootContainer.as(Characteristics.CACHE).addComponent(JndiDatabaseConnector.class);
     rootContainer.start();
 
