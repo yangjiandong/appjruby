@@ -7,6 +7,18 @@ ruby
    1. rails maven 
    http://github.com/mkristian/jruby-maven-plugins
    http://blog.mkristian.tk/2010/04/mavenize-existing-rails-application.html
+   
+   rails3:
+    mvn archetype:generate -DarchetypeCatalog=http://github.com/mkristian/jruby-maven-plugins/raw/master/archetype-catalog.xml -Drails.version=3.0.0.beta3 -Ddatabase=mysql
+   -- 会报错
+
+   -- 按以下步骤建立 mvn 插件
+   get clone http://github.com/mkristian/jruby-maven-plugins.git
+   cd jruby-maven-plugins.git
+   mvn install
+
+   cd workspace
+   mvn rails3:rails -Dapp_path=myapp
 
    2. ruby on rails 连接多个数据库
 
