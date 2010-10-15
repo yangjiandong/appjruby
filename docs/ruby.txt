@@ -8,6 +8,50 @@ ruby
    http://github.com/mkristian/jruby-maven-plugins
    http://blog.mkristian.tk/2010/04/mavenize-existing-rails-application.html
 
+   2. ruby on rails 连接多个数据库
+
+首先在database.yml中加入以下代码，其中cg_clone是外部等待使用的数据库。
+cg_clone:
+adapter: mysql
+database: cg_clone
+username: root
+password: 
+host: localhost 
+
+假如在cg_clone中有一张表叫contracts，那么生成Contract类。并用establish_connection来声明建立到哪个数据库的连接：
+
+class Contract < ActiveRecord::Base
+establish_connection :cg_clone
+end
+
+这样我们在控制器中就可以使用Contract类了，如：
+
+def contract_list
+   @contracts=Contract.find_all
+end
+
+   3. 一个成功的rails 例子
+   http://blog.nicksieger.com/articles/2010/02/24/jruby-and-rails-3-sitting-in-a-tree
+
+   jruby -S gem install rails 
+   jruby -S gem install activerecord-jdbcsqlite3-adapter
+   jruby -S rails new myapp -m http://jruby.org/rails3.rb
+   $ cd myapp
+   $ jruby script/rails server
+
+   4. activerecord-jdbc-adapter
+
+gem install activerecord-jdbc-adapter
+Included are adapters for MySQL, PostgreSQL, SQLite3, Derby, HSQLDB, H2, and Microsoft SQL Server.
+
+gem install activerecord-jdbcmysql-adapter
+gem install activerecord-jdbcpostgresql-adapter
+gem install activerecord-jdbcsqlite3-adapter
+gem install activerecord-jdbcderby-adapter
+gem install activerecord-jdbchsqldb-adapter
+gem install activerecord-jdbch2-adapter
+gem install activerecord-jdbcmssql-adapter
+
 2010.10.14
 ----------
 
