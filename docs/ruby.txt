@@ -1,6 +1,43 @@
 ruby
 =========
 
+2010.10.15
+----------
+
+   1. rails maven 
+   http://github.com/mkristian/jruby-maven-plugins
+   http://blog.mkristian.tk/2010/04/mavenize-existing-rails-application.html
+
+2010.10.14
+----------
+
+   1. JRuby on Rails: Deploying to Oracle Containers for Java EE (OC4J)This is a featured page  
+   http://wiki.oracle.com/page/JRuby+on+Rails%3A+Deploying+to+Oracle+Containers+for+Java+EE+%28OC4J%29
+
+ Packaging Rails app into WAR
+Warbler is a gem to make a single WAR file out of a Rails project and provides a minimal, flexible, Ruby-like way to bundle up all of your application files for deployment to a Java application server. It's developed by Nick Sieger, one of the core developer of JRuby. Warbler bundles JRuby and the Goldspike servlet for dispatching requests to your application inside the java application server, and assembles all jar files in $WARBLER_HOME/lib/*.jar into your application. No external dependencies are needed.
+
+   1. Install Warbler :
+
+          jruby -S gem install warbler
+
+   2. Generate the Warbler configuration file:
+
+          jruby -S warbler config
+
+      and change the 13th line of config/warble.rb file to
+
+          config.gems = ["activerecord-jdbc-adapter", "rails" ]
+
+      because Warbler doesn't automatically package the activerecord JDBC driver.
+
+   3. Package the app:
+
+          jruby -S warbler [war]
+
+      A WAR file(bookstore.war) is generated under the top directory of the Rails app.
+
+
 2010.10.12
 ------------
 
