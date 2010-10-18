@@ -13,12 +13,21 @@ ruby
    -- 会报错
 
    -- 按以下步骤建立 mvn 插件
-   get clone http://github.com/mkristian/jruby-maven-plugins.git
+   git clone http://github.com/mkristian/jruby-maven-plugins.git
    cd jruby-maven-plugins.git
    mvn install
+   
+   编辑mvn/conf/settings.xml
+  <pluginGroups>
+    <pluginGroup>de.saumya.mojo</pluginGroup>
+  </pluginGroups>
 
    cd workspace
    mvn rails3:rails -Dapp_path=myapp
+
+   rails2:
+   具体参考 rails2-maven-plugin READEM
+   sonar 项目就是参考了rails2-maven-plugin
 
    2. ruby on rails 连接多个数据库
 
