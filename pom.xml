@@ -320,7 +320,7 @@ mmmm
         </executions>
       </plugin>
 
-	    <!-- eclipse²å¼þ -->
+	    <!-- eclipseÂ²Ã¥Â¼Ã¾ -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-eclipse-plugin</artifactId>
@@ -430,7 +430,7 @@ mmmm
       <dependency>
         <groupId>commons-collections</groupId>
         <artifactId>commons-collections</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.2</version>
       </dependency>
       <dependency>
         <groupId>com.google.collections</groupId>
